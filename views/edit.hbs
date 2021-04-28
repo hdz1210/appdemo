@@ -1,19 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product</title>
+  <title>Update product</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
+<style>
+.form_main {
+    width: 100%;
+}
+.form_main h4 {
+    font-family: roboto;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+.heading {
+    border-bottom: 1px solid #fcab0e;
+    padding-bottom: 9px;
+    position: relative;
+}
+.heading span {
+    background: #9e6600 none repeat scroll 0 0;
+    bottom: -2px;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 75px;
+}   
+.form {
+    border-radius: 7px;
+    padding: 6px;
+}
+.txt[type="text"] {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px 0 10px 5px;
+    width: 100%;
+}
+.txt_3[type="text"] {
+    margin: 10px 0 0;
+    padding: 10px 0 10px 5px;
+    width: 100%;
+}
+.txt2[type="submit"] {
+    background: #242424 none repeat scroll 0 0;
+    border: 1px solid #4f5c04;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 35px;
+    margin: 10px 0;
+    padding: 0;
+    text-transform: uppercase;
+    width: 30%;
+}
+.txt2:hover {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #5793ef;
+    transition: all 0.5s ease 0s;
+}
+</style>
+
 <body>
-    <h1>Update product</h1>
-    <form action="/update" method="post">
-        <input type="hidden" name="txtId" value="{{product._id}}">
-        Name <input type="text" name="txtName" value="{{product.name}}"/>
-        <br>       
-        Price <input type="text" name="txtPrice" value="{{product.price}}"/>
-        <input type="submit" value="Update">
-    </form>
+
+<div class="container">
+	<div class="row">
+    <div class="col-md-4">
+		<div class="form_main">
+                <h4 class="heading"><strong>Quick </strong> edit <span></span></h4>
+                <div class="form">
+                    <form action="/update" method="post">
+                    <input type="hidden" name="txtId" value="{{product._id}}">
+                    <input type="text" required="" placeholder="Please input product name" value="{{product.name}}" name="txtName" class="txt">
+                    <input type="text" required="" placeholder="Please input price" value="{{product.price}}" name="txtPrice" class="txt">
+                    <input type="submit" value="Update" class="txt2">
+                </form>
+                </div>
+        </div>
+    </div>
+	</div>
+</div>
 </body>
 </html>
