@@ -47,16 +47,7 @@ app.post('/doLogin',async (req,res)=>{
     
     if (count== 0){
         res.render('login',{message: 'Invalid user!'})
-    }else{
-        let name ='';
-        await cursor.forEach(doc=>{      
-            name = doc.name;          
-        })
-        req.session.User = {
-            name : name,
-        }
-        res.redirect('/')
-    }    
+    }
 })
 
 app.post('/update',async (req,res)=>{
