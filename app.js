@@ -9,16 +9,14 @@ app.use(session({
     secret: 'some122$$%*$##!!#$%@#$%', 
     cookie: { maxAge: 60000 }}));
 
-
-var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb+srv://hiiue:HDZ1210hdz@cluster0.pw1gs.mongodb.net/test';
-
 var hbs = require('hbs')
 app.set('view engine','hbs')
 
-
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }))
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb+srv://hiiue:HDZ1210hdz@cluster0.pw1gs.mongodb.net/test';
 
 app.get('/login',(req,res)=>{
     res.render('login')
@@ -29,14 +27,14 @@ app.get('/register',(req,res)=>{
 app.post('/new',async (req,res)=>{
     var nameInput = req.body.txtName;
     var passInput = req.body.txtPassword;
-    var roleInput = req.body.role;
-    var newUser = {name: nameInput, password:passInput,role:roleInput};
+    var newUser = {name: nameInput, password:passInput};
 
     let client= await MongoClient.connect(url);
     let dbo = client.db("LoginDemo");
     await dbo.collection("users").insertOne(newUser);
     res.redirect('/login')
 })
+
 app.post('/doLogin',async (req,res)=>{
     var nameInput = req.body.txtName;
     var passInput = req.body.txtPassword;
@@ -51,18 +49,14 @@ app.post('/doLogin',async (req,res)=>{
         res.render('login',{message: 'Invalid user!'})
     }else{
         let name ='';
-        let role = ''
         await cursor.forEach(doc=>{      
-            name = doc.name;
-            role = doc.role;           
+            name = doc.name;          
         })
         req.session.User = {
             name : name,
-            role : role
         }
         res.redirect('/')
     }    
-
 })
 
 app.post('/update',async (req,res)=>{
